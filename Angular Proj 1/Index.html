@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <title>Laerning Angular Js</title>
+
+<script type="text/javascript" src="/Learn Angular/angular-1.5.8/angular-1.5.8/angular.min.js" ></script>
+
+<script type="text/javascript" src="angular_1_router.js" ></script>
+<!-- <script type="text/javascript" src="/Learn Angular/angular-1.5.8/angular-1.5.8/angular-route.min.js" ></script> -->
+<script type="text/javascript" src="SecondComponent.js"></script>
+
+</head>
+<body ng-app="testmodule">
+
+<h1>testing Angular js 1.5</h1>
+
+
+<script type="text/ng-template" id="temp1.html">
+    <div >{{model123.name}}</div>
+    <button ng-click="model123.test()">abc</button>
+    <ng-outlet></ng-outlet>
+  
+ </script>
+
+ <script type="text/ng-template" id="temp2.html">
+    <div >{{$ctrl.name}}</div>
+    <button ng-click="$ctrl.testSecond()">abc</button>
+ </script>
+<my-test >
+</my-test>
+
+<script type="text/javascript">
+    var app=angular.module('testmodule',['ngComponentRouter']);
+    app.value("$routerRootComponent",'myTest');
+    app.component('myTest',{
+    templateUrl:'temp1.html',
+    controllerAs: 'model123',
+    $routeConfig:[
+        { path: "/sc", component: "mySecondcomponent", name: "Second" }
+    ],
+    bindings:{
+        "$router": "<"
+    },
+    controller:function($scope){
+        console.log($scope);
+        var model = this;
+
+        
+
+        model.$onInit = function(){
+
+        };
+        model.test= function(){
+           
+
+            this.$router.navigate(['Second']);
+        }
+        model.name='My test Component   1233';
+ 
+    }});
+
+       
+    </script>
+
+</body>
+</html>
